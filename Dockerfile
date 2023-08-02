@@ -11,37 +11,25 @@ RUN apt-get update \
     && apt-get install -y unzip
 
 
-#RUN apk add git g++ cmake make boost-dev wget unzip zip
-
 #BAZEL
 RUN mkdir /workspace
 WORKDIR /workspace
 
 
 RUN wget https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-2.6.0.tar.gz
-RUN tar -C /workspace -xzf libtensorflow-cpu-linux-x86_64-2.6.0.tar.gz
+RUN tar -C /usr/local -xzf libtensorflow-cpu-linux-x86_64-2.6.0.tar.gz
 RUN ldconfig
-#RUN export LIBRARY_PATH=$LIBRARY_PATH:~/workspace/libtensorflow-cpu-linux-x86_64-2.6.0.tar.gz/lib
-#RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/workspace/libtensorflow-cpu-linux-x86_64-2.6.0.tar.gz/lib
-# RUN chmod +x protoc-3.9.2-linux-x86_64.zip
-# RUN ./protoc-3.9.2-linux-x86_64.zip --user
-# RUN export PATH="$PATH:$HOME/bin"
-#RUN ./configure --prefix=/home/rangsiman/protobuf-3.9.2/ CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=0"
 
+
+WORKDIR /
+RUN git clone https://github.com/Amandaa-S/tfrs.git
+WORKDIR /tfrs
 RUN gcc hello_tf.c -ltensorflow -o hello_tf
 
-# WORKDIR /
-# RUN git clone https://github.com/serizba/cppflow.git
-# WORKDIR /cppflow/examples/load_model
-# #RUN g++ -std=c++17 -o main.out main.cpp -ltensorflow
-# RUN mkdir build
-# WORKDIR /cppflow/examples/load_model/build
-# #RUN -DCMAKE_PREFIX_PATH=/workspace/libtensorflow-cpu-linux-x86_64-2.6.0.tar.gz/lib
-# RUN cmake ..
-# RUN make -j
-# RUN make install
 
 
+
+CMD ["./hello_tf"]
 
 
 #ROUNDING SAT
