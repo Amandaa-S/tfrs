@@ -27,5 +27,6 @@ int main() {
   for (int i = 0; i < INPUT_SIZE; i++) {
       input[i] = i + 1;
   }
+  printf("Loaded model");
   return 0;
 }
